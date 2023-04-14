@@ -6,7 +6,7 @@ import {
   resetPassword,
   verifyResetPasswordurl,
   UpdateNewPassword,
-} from "../../apis";
+} from "../../auth.apis";
 
 const initialState = {
   message: null,

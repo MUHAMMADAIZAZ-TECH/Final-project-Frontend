@@ -1,4 +1,5 @@
 import ConnectionLost from "./ConnectionLost/ConnectionLost";
 import Home from "./Home/Home";
 import NotFoundPage from "./NotFound/NotFound";
-export { Home, NotFoundPage,ConnectionLost };
+import NewBooking from "./NewBooking/NewBooking";
+export { Home, NotFoundPage, ConnectionLost, NewBooking };

@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect ,useState } from "react";
 import Auth, {
   SignIn,
@@ -10,7 +9,7 @@ import Auth, {
 import UserDashboard from "./Components/Dashboard/UserDashboard";
 import { CustomSnackbar, ScreenLoader } from "./Components/UI-Components/";
 import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
-import { Home, NotFoundPage, ConnectionLost } from "./Components/Pages";
+import { Home, NotFoundPage, ConnectionLost, NewBooking } from "./Components/Pages";
 import { authenticateUser } from "./Store/Slicers/Authentication/AuthenticationSlice";
 import { useDispatch, useSelector } from "react-redux";
 function App() {
@@ -34,6 +33,7 @@ function App() {
         throw new Error("authentication has been failed!");
       })
       .then((resObject) => {
+        console.log(resObject)
         dispatch(authenticateUser(resObject));
       })
       .catch((err) => {
@@ -72,15 +72,10 @@ function App() {
           <Route path="/password-reset/:id/:token" element={<PasswordReset />}
           />
         </Route>
-        <Route path="/Dashboard" element={
-            state.isAuthenticated === true || document.cookie ? (
-              <UserDashboard />
-            ) : (
-              <Navigate replace to="/SignIn" />
-            )
-          }
-        >
+        <Route path="/Dashboard" element={state.isAuthenticated === true || document.cookie ? (<UserDashboard />) : (<Navigate replace to="/SignIn" />)}>
           <Route index element={<Home />} />
+          <Route path="/Dashboard/Bookings" element={<Home />} />
+          <Route path="/Dashboard/NewBooking" element={<NewBooking />} />
         </Route>
         <Route path="*" index element={<NotFoundPage />} />
       </Routes>: <ConnectionLost/>}

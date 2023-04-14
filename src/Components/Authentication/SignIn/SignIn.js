@@ -12,7 +12,7 @@ import {
   AppleLoginButton,
 } from "react-social-login-buttons";
 import { signin } from "../../../Store/Slicers/Authentication/AuthenticationSlice";
-import { resetuserstates } from "../../../Store/Slicers/UserSlicer/UserSlicer";
+import { resetuserstates } from "../../../Store/Slicers/TravelSlice/TravelSlice";
 const SignIn = () => {
   const validationSchema = Yup.object({
     Email: Yup.string()

@@ -1,6 +1,8 @@
 import TextInput from "./InputFields/TextField";
 import CustomButton from "./Buttons/Button";
-import Card from "./Card/Card";
 import CustomSnackbar from "./Snackbar/Snackbar";
 import ScreenLoader from "./Loader/Loader";
-export { TextInput, CustomButton, Card, CustomSnackbar,ScreenLoader  };
+import EditModal from "./Modal/Modal";
+import BookingForm from "./BookingForm/BookingForm";
+import Table from "./DataGrid/DataGrid";
+export { TextInput, CustomButton, CustomSnackbar, ScreenLoader, EditModal, BookingForm ,Table };

@@ -1,30 +1,100 @@
-import React, { useEffect } from "react";
-import { Card } from "../../UI-Components/";
+import React, { useState, useEffect } from "react";
 import {
-  Edit,
-  Cached,
-  StarOutlineRounded,
-  MoreHorizRounded,
-} from "@mui/icons-material/";
-import { getDashboardDetails } from "../../../Store/Slicers/UserSlicer/UserSlicer";
+  EditModal,
+  BookingForm,
+  Table,
+} from "../../UI-Components/";
+import {
+  getbookings,
+  deletebooking,
+  updatebooking
+} from "../../../Store/Slicers/TravelSlice/TravelSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
   CssBaseline,
   Box,
   Grid,
   Typography,
-  Button,
-  IconButton,
 } from "@mui/material";
 export const Home = () => {
   const dispatch = useDispatch();
-  const state = useSelector((state) => state.user);
+  const reduxstate = useSelector((state) => state.user);
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user)
-  useEffect(() => {
-    dispatch(getDashboardDetails(user.Provider));
-  }, []);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = (Item) => {
+    const { __v,...rest} = Item;
+    setstate(rest);
+    setOpen(true);
+  };
+  const handleClose = () => setOpen(false);
+  const handler = (e) => {
+    setstate({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const [state, setstate] = useState({
+    CustomerId: "",
+    CustomerName: "",
+    CustomerAddress: "",
+    CustomerPhoneNo: "",
+    Destination: "",
+    StartDate: "",
+    EndDate: "",
+  });
 
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 1200,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 6,
+  };
+  const [formErrors, setFormErrors] = useState({});
+  const validateForm = () => {
+    const errors = {};
+    Object.keys(state).forEach((key) => {
+      if (!state[key]) {
+        errors[key] = `This Field is required`;
+      }
+    });
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+  const Update = () => {
+    if (validateForm()) {
+      dispatch(updatebooking(state))
+    }
+  };
+  const Delete = () => {
+    if (validateForm()) {
+      dispatch(deletebooking(state.BookingId))
+    }
+  };
+  const content = (
+    <Box sx={style}>
+      <Grid item xs={12}>
+        <div style={{ padding: 20 }}>
+          <Typography variant="h5">Edit Details</Typography>
+        </div>
+      </Grid>
+      <BookingForm
+        handler={handler}
+        state={state}
+        onUpdate={() => Update()}
+        onDelete={() => Delete()}
+        formErrors={formErrors}
+        closebutton={handleClose}
+      />
+    </Box>
+  );
+  useEffect(() => {
+    dispatch(getbookings(user.Provider));
+  }, []);
   return (
     <React.Fragment>
       <CssBaseline />
@@ -43,17 +113,14 @@ export const Home = () => {
                 justifyContent: "space-between",
               }}
             >
-              <Typography variant="h5">Default dashboard</Typography>
+              <Typography variant="h5">Bookings</Typography>
             </div>
           </Grid>
         </Grid>
         <Grid container rowSpacing={2} columns={{ xs: 6, md: 12 }}>
-          {state?.dashboardDetails?.map((Item, index) => (
-            <Grid key={index} item xs={6}>
-              <Card content={Item} />
-            </Grid>
-          ))}
+          {reduxstate?.bookingList?.Bookings?<Table rows={reduxstate?.bookingList?.Bookings} onRowClick={(item) => handleOpen(item.row)}/>:null}
         </Grid>
+        <EditModal open={open} handleClose={handleClose} content={content} />
       </Box>
     </React.Fragment>
   );

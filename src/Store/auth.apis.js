@@ -1,10 +1,8 @@
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:5000/";
-axios.defaults.withCredentials = true;
-
+axios.defaults.baseURL = "http://localhost:5000";
 export const SignIn = async (state) => {
   try {
-    const response = await axios.post(`signin`, state);
+    const response = await axios.post(`/signin`, state);
     return response.data;
   } catch (error) {
     return error.response.data;
@@ -12,23 +10,15 @@ export const SignIn = async (state) => {
 };
 export const SignUp = async (state) => {
   try {
-    const response = await axios.post(`signup`, state);
+    const response = await axios.post(`/signup`, state);
     return response.data;
   } catch (error) {
     return error.response.data;
   }
 };
-export const GetDashboardDetails = async (Provider) => {
-  const response = await axios.get(`get/travelManagementdashboard/content`,{
-    params: {
-      UserType: Provider
-    }
-  });
-  return response;
-};
 export const verifyEmailUrl = async (params) => {
   try {
-    const response = await axios.get(`${params.id}/verify/${params.token}`);
+    const response = await axios.get(`/${params.id}/verify/${params.token}`);
     return response.data;
   } catch (error) {
     return error.response.data;
@@ -36,7 +26,7 @@ export const verifyEmailUrl = async (params) => {
 };
 export const resetPassword = async (state) => {
   try {
-    const response = await axios.post("password-reset", state);
+    const response = await axios.post("/password-reset", state);
     return response.data;
   } catch (error) {
     return error.response.data;
@@ -45,7 +35,7 @@ export const resetPassword = async (state) => {
 export const verifyResetPasswordurl = async (params) => {
   try {
     const response = await axios.get(
-      `password-reset/${params.id}/${params.token}`
+      `/password-reset/${params.id}/${params.token}`
     );
     return response.data;
   } catch (error) {
@@ -56,7 +46,7 @@ export const UpdateNewPassword = async (state) => {
   const { params, Password } = state;
   try {
     const response = await axios.post(
-      `password-reset/${params.id}/${params.token}`,
+      `/password-reset/${params.id}/${params.token}`,
       { Password }
     );
     window.location = "/SignIn";
