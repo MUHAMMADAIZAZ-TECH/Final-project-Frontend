@@ -44,7 +44,7 @@ const SignUp = () => {
     },
   });
   const google = () => {
-    window.open("https://final-project-backend.cyclic.app/auth/google", "_self");
+    window.open("http://localhost:5000/auth/google", "_self");
   };
 
   return (

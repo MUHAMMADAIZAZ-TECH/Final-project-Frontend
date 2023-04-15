@@ -19,7 +19,7 @@ function App() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const { User } = state;
   const getUser = () => {
-    fetch("https://final-project-backend.cyclic.app/auth/login/success", {
+    fetch("http://localhost:5000/auth/login/success", {
       method: "GET",
       credentials: "include",
       headers: {

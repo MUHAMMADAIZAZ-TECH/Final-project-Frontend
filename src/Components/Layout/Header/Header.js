@@ -17,7 +17,7 @@ export default function Header() {
   const LogOut = () => {
     if(User?.Provider==="google"){
       dispatch(resetauthstates());
-      window.open("https://final-project-backend.cyclic.app/auth/logout", "_self");
+      window.open("http://localhost:5000/auth/logout", "_self");
       localStorage.removeItem('user')
       localStorage.removeItem('isauthenticated')
     }
