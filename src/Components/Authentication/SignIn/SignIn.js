@@ -5,12 +5,7 @@ import { TextInput, CustomButton } from "../../UI-Components/";
 import { Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Image3 } from "../../../Assests/Images/index";
-import {
-  GoogleLoginButton,
-  GithubLoginButton,
-  AppleLoginButton,
-} from "react-social-login-buttons";
+import { GoogleLoginButton } from "react-social-login-buttons";
 import { signin } from "../../../Store/Slicers/Authentication/AuthenticationSlice";
 import { resetuserstates } from "../../../Store/Slicers/TravelSlice/TravelSlice";
 const SignIn = () => {
@@ -96,7 +91,6 @@ const SignIn = () => {
         <Link to="/ForgotPassword">Can't log in?</Link>
         <Link to="/SignUp">Doesn't have an account?</Link>
       </div>
-      <img src={Image3} height={30} width={160} alt="" />
       <div className="signup-text">
        Confluence, Trello and more.
         <br />

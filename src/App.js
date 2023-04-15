@@ -7,7 +7,7 @@ import Auth, {
   PasswordReset,
 } from "./Components/Authentication/Auth";
 import UserDashboard from "./Components/Dashboard/UserDashboard";
-import { CustomSnackbar, ScreenLoader } from "./Components/UI-Components/";
+import { CustomSnackbar } from "./Components/UI-Components/";
 import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
 import { Home, NotFoundPage, ConnectionLost, NewBooking } from "./Components/Pages";
 import { authenticateUser } from "./Store/Slicers/Authentication/AuthenticationSlice";
@@ -80,7 +80,6 @@ function App() {
         <Route path="*" index element={<NotFoundPage />} />
       </Routes>: <ConnectionLost/>}
       <CustomSnackbar />
-      {state.loading?<ScreenLoader/>:null}
     </React.Fragment>
   );
 }

@@ -95,6 +95,11 @@ export const Home = () => {
   useEffect(() => {
     dispatch(getbookings(user.Provider));
   }, []);
+  useEffect(()=>{
+    if(reduxstate.isSuccess){
+      handleClose()
+    }
+  },[reduxstate.isSuccess])
   return (
     <React.Fragment>
       <CssBaseline />
@@ -118,7 +123,7 @@ export const Home = () => {
           </Grid>
         </Grid>
         <Grid container rowSpacing={2} columns={{ xs: 6, md: 12 }}>
-          {reduxstate?.bookingList?.Bookings?<Table rows={reduxstate?.bookingList?.Bookings} onRowClick={(item) => handleOpen(item.row)}/>:null}
+          <Table rows={reduxstate?.bookingList?.Bookings} reduxstate={reduxstate} onRowClick={(item) => handleOpen(item.row)}/>
         </Grid>
         <EditModal open={open} handleClose={handleClose} content={content} />
       </Box>

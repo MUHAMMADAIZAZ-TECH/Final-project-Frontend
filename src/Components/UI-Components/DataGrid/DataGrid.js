@@ -36,11 +36,11 @@ const columns = [
   },
 ];
 
-export default function Table( { rows,onRowClick } ) {
+export default function Table( { rows, onRowClick ,reduxstate} ) {
   return (
     <Box sx={{ height: 400, width: '100%' }}>
       <DataGrid
-        rows={rows}
+        rows={rows?rows:[]}
         columns={columns}
         initialState={{
           pagination: {
@@ -49,6 +49,7 @@ export default function Table( { rows,onRowClick } ) {
             },
           },
         }}
+        loading={reduxstate.loading}
         getRowId={(row)=>row?.CustomerId}
         pageSizeOptions={[5]}
         onRowClick={onRowClick}

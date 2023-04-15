@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { BookingForm } from "../../UI-Components/";
 import { newbooking } from "../../../Store/Slicers/TravelSlice/TravelSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   CssBaseline,
   Box,
@@ -19,13 +19,11 @@ export const NewBooking = () => {
     StartDate:"",
     EndDate:""
   })
-  const ReduxState = useSelector((state) => state.user);
   const handler = (e) =>{
     setstate({
         ...state,[e.target.name] : e.target.value
     })
   }
-  const user = JSON.parse(localStorage.getItem("user"));
   const [formErrors, setFormErrors] = useState({});
 
   const validateForm = () => {

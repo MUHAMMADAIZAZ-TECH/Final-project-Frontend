@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { resetauthstates } from "../../../Store/Slicers/Authentication/AuthenticationSlice";
-import { Image4, Image6, Image7, Image8 } from "../../../Assests/Images/index";
-import { Apps, Search, ArrowDropDown } from "@mui/icons-material";
+import { Apps } from "@mui/icons-material";
 import {
   Menu,
   MenuItem,
