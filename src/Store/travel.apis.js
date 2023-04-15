@@ -1,5 +1,5 @@
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = "https://final-project-backend.cyclic.app";
 axios.defaults.withCredentials = true;
 const User = JSON.parse(localStorage.getItem("user"))
   export const GetBookings = async () => {

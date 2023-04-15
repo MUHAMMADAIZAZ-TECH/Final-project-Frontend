@@ -1,5 +1,5 @@
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = "https://final-project-backend.cyclic.app";
 export const SignIn = async (state) => {
   try {
     const response = await axios.post(`/signin`, state);
