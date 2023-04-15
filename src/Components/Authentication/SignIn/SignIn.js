@@ -32,7 +32,7 @@ const SignIn = () => {
   });
   const dispatch = useDispatch();
   const google = () => {
-    window.open("http://localhost:5000/auth/google", "_self");
+    window.open("https://final-project-backend.cyclic.app/auth/google", "_self");
   };
   useEffect(() => {
     dispatch(resetuserstates());
