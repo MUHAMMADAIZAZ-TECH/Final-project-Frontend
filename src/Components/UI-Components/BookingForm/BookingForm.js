@@ -1,7 +1,7 @@
 import React from 'react'
-import { CustomButton,TextInput } from "../../UI-Components/";
+import { CustomButton,MyDatePicker,TextInput } from "../../UI-Components/";
 import { Grid } from "@mui/material";
-const BookingForm = ({ handler,state,onUpdate,onDelete,newpage,onClick ,formErrors,closebutton}) => {
+const BookingForm = ({ handler,state,onUpdate,onDelete,newpage,onClick ,formErrors,closebutton,StateDateHandler,EndDateHandler}) => {
   return (
   <Grid container rowSpacing={2} columnSpacing={1} columns={{ xs: 6, md: 12 }}>
     <Grid item xs={2}>
@@ -80,34 +80,10 @@ const BookingForm = ({ handler,state,onUpdate,onDelete,newpage,onClick ,formErro
       />
     </Grid>
     <Grid item xs={3}>
-      <TextInput
-        fullWidth
-        required
-        size="small"
-        label={"Start Date"}
-        change={handler}
-        error={formErrors.StartDate?true:false}
-        helper={formErrors.StartDate}
-        value={state.StartDate}
-        name="StartDate"
-        type="text"
-        variant="outlined"
-      />
+      <MyDatePicker label="Start Date" size="small" required value={state.StartDate} onChange={StateDateHandler}/>
     </Grid>
     <Grid item xs={3}>
-      <TextInput
-        fullWidth
-        required
-        size="small"
-        change={handler}
-        label={"End Date"}
-        value={state.EndDate}
-        error={formErrors.EndDate?true:false}
-        helper={formErrors.EndDate}
-        name="EndDate"
-        type="text"
-        variant="outlined"
-      />
+    <MyDatePicker label="End Date" size="small" required value={state.EndDate} onChange={EndDateHandler}/>
     </Grid>
    {!newpage?<>
     <Grid item xs={4}>

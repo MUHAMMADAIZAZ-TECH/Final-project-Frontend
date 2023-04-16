@@ -42,7 +42,6 @@ export const Home = () => {
     StartDate: "",
     EndDate: "",
   });
-
   const style = {
     position: "absolute",
     top: "50%",
@@ -75,6 +74,8 @@ export const Home = () => {
       dispatch(deletebooking(state.BookingId))
     }
   };
+  const StateDateHandler = (date) => setstate({...state,StartDate : date.format('DD-MM-YYYY')});
+  const EndDateHandler = (date) => setstate({...state,EndDate : date.format('DD-MM-YYYY')})
   const content = (
     <Box sx={style}>
       <Grid item xs={12}>
@@ -89,6 +90,8 @@ export const Home = () => {
         onDelete={() => Delete()}
         formErrors={formErrors}
         closebutton={handleClose}
+        StateDateHandler={StateDateHandler} 
+        EndDateHandler={EndDateHandler}
       />
     </Box>
   );
@@ -123,7 +126,7 @@ export const Home = () => {
           </Grid>
         </Grid>
         <Grid container rowSpacing={2} columns={{ xs: 6, md: 12 }}>
-          <Table rows={reduxstate?.bookingList?.Bookings} reduxstate={reduxstate} onRowClick={(item) => handleOpen(item.row)}/>
+          <Table rows={reduxstate?.bookingList} reduxstate={reduxstate} onRowClick={(item) => handleOpen(item.row)}/>
         </Grid>
         <EditModal open={open} handleClose={handleClose} content={content} />
       </Box>

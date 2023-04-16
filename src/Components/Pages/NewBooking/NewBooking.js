@@ -1,7 +1,7 @@
-import React, {  useState } from "react";
+import React, {  useState ,useEffect} from "react";
 import { BookingForm } from "../../UI-Components/";
 import { newbooking } from "../../../Store/Slicers/TravelSlice/TravelSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch , useSelector} from "react-redux";
 import {
   CssBaseline,
   Box,
@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 export const NewBooking = () => {
   const dispatch = useDispatch();
+  const reduxstate = useSelector((state) => state.user);
   const [state,setstate] = useState({
     CustomerId:"",
     CustomerName:"",
@@ -24,6 +25,8 @@ export const NewBooking = () => {
         ...state,[e.target.name] : e.target.value
     })
   }
+  const StateDateHandler = (date) => setstate({...state,StartDate : date.format('DD-MM-YYYY')});
+  const EndDateHandler = (date) => setstate({...state,EndDate : date.format('DD-MM-YYYY')})
   const [formErrors, setFormErrors] = useState({});
 
   const validateForm = () => {
@@ -41,6 +44,18 @@ export const NewBooking = () => {
       dispatch(newbooking(state))
     }
   };
+  useEffect(()=>{
+    console.log(reduxstate.isSuccess)
+    setstate({
+      CustomerId:"",
+      CustomerName:"",
+      CustomerAddress:"",
+      CustomerPhoneNo:"",
+      Destination:"",
+      StartDate:"",
+      EndDate:""
+    })
+  },[reduxstate.isSuccess])
   return (
     <React.Fragment>
       <CssBaseline />
@@ -52,7 +67,8 @@ export const NewBooking = () => {
             </div>
           </Grid>
         </Grid>
-      <BookingForm handler={handler} state={state} onClick={()=>handleSubmit()} newpage formErrors={formErrors}/>
+      <BookingForm handler={handler} state={state} onClick={()=>handleSubmit()} newpage formErrors={formErrors} 
+      StateDateHandler={StateDateHandler} EndDateHandler={EndDateHandler}/>
       </Box>
     </React.Fragment>
   );

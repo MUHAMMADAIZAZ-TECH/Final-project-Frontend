@@ -4,15 +4,20 @@ import { GetBookings,NewBooking,DeleteBooking,UpdateBooking } from "../../travel
 const initialState = {
   message:null,
   loading: false,
-  bookingList: null,
+  bookingList: [],
   error: null,
   isSuccess: false,
+  open: false
 };
 const userSlice = createSlice({
   name: "user",
   initialState: initialState,
   reducers: {
     resetuserstates: (state) => (state = initialState),
+    resetMessage: (state) => {
+      state.open = false;
+      state.message = null;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -23,8 +28,7 @@ const userSlice = createSlice({
       })
       .addCase(getbookings.fulfilled, (state, action) => {
         state.loading = false;
-        state.bookingList = action.payload;
-        state.message = action.payload.message;
+        state.bookingList = action.payload.Bookings;
         state.isSuccess = false;
       })
       .addCase(getbookings.rejected, (state, action) => {
@@ -42,6 +46,7 @@ const userSlice = createSlice({
         state.loading = false;
         state.message = action.payload.message;
         state.isSuccess = true;
+        state.open = true;
       })
       .addCase(newbooking.rejected, (state, action) => {
         state.loading = false;
@@ -59,6 +64,7 @@ const userSlice = createSlice({
         state.message = action.payload.message;
         state.bookingList = action.payload.UpdatedList;
         state.isSuccess = true;
+        state.open = true;
       })
       .addCase(deletebooking.rejected, (state, action) => {
         state.loading = false;
@@ -76,6 +82,7 @@ const userSlice = createSlice({
         state.message = action.payload.message;
         state.bookingList = action.payload.UpdatedList;
         state.isSuccess = true;
+        state.open = true;
       })
       .addCase(updatebooking.rejected, (state, action) => {
         state.loading = false;
@@ -113,5 +120,5 @@ export const updatebooking = createAsyncThunk(
   }
 );
 
-export const { resetuserstates } = userSlice.actions;
+export const { resetuserstates,resetMessage } = userSlice.actions;
 export default userSlice.reducer;
