@@ -9,6 +9,7 @@ export default function MyDatePicker({ label,size,value,onChange}) {
     <LocalizationProvider dateAdapter={AdapterMoment}>
     <DatePicker value={value ? moment(value) : null} onChange={onChange} 
     slotProps={{ textField: { size: size, required:true} }} 
+    sx={{ width:"100%"}}
     label={label}/>
   </LocalizationProvider>
   );
