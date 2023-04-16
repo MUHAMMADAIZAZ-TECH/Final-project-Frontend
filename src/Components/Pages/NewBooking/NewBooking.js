@@ -45,16 +45,17 @@ export const NewBooking = () => {
     }
   };
   useEffect(()=>{
-    console.log(reduxstate.isSuccess)
-    setstate({
-      CustomerId:"",
-      CustomerName:"",
-      CustomerAddress:"",
-      CustomerPhoneNo:"",
-      Destination:"",
-      StartDate:"",
-      EndDate:""
-    })
+    if(reduxstate.isSuccess){
+      setstate({
+        CustomerId:"",
+        CustomerName:"",
+        CustomerAddress:"",
+        CustomerPhoneNo:"",
+        Destination:"",
+        StartDate:"",
+        EndDate:""
+      })
+    }
   },[reduxstate.isSuccess])
   return (
     <React.Fragment>

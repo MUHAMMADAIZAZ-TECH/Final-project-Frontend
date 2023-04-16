@@ -33,21 +33,21 @@ function App() {
         throw new Error("authentication has been failed!");
       })
       .then((resObject) => {
-        console.log(resObject)
         dispatch(authenticateUser(resObject));
       })
       .catch((err) => {
-        console.log(err);
       });
   };
   useEffect(() => {
+    console.log(User)
     if(!User.Provider && User.Provider !=="normal"){
       getUser()
     }
   }, []);
   useEffect(() => {
     if (state.isAuthenticated === true) {
-      navigate("/Dashboard");
+      window.location = "/Dashboard"
+      // navigate("/Dashboard");
     }
   }, [state.isAuthenticated]);
   useEffect(() => {

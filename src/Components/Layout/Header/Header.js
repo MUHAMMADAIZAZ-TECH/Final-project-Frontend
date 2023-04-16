@@ -11,8 +11,10 @@ import {
   AppBar,
   IconButton,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 export default function Header() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const User = JSON.parse(localStorage.getItem("user"))
   const LogOut = () => {
     if(User?.Provider==="google"){
@@ -24,6 +26,7 @@ export default function Header() {
     else{
       deleteCookies()
       dispatch(resetauthstates());
+      navigate("/")
       localStorage.removeItem('user')
       localStorage.removeItem('isauthenticated')
     }
